@@ -1,4 +1,7 @@
 import Server from './server'
 
 const [ , startServer ] = Server()
-startServer()
+
+;(async function() {
+  await startServer()
+})()

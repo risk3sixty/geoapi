@@ -11,13 +11,15 @@
     "url": "https://github.com/Risk3sixty-Labs/geoapi"
   },
   "scripts": {
-    "build": "mkdir -p logs && gulp build",
+    "build": "gulp build",
     "postinstall": "npm run build",
     "start": "node forever",
     "test": "mocha --exit --require @babel/register --recursive './src/**/*.spec.js'"
   },
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5"
   },
   "dependencies": {
     "@babel/core": "^7.5.5",
@@ -32,8 +34,6 @@
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-plumber": "^1.2.1",
-    "request": "^2.87.0",
-    "request-promise-native": "^1.0.5",
     "webpack-node-externals": "^1.7.2",
     "webpack-stream": "^5.2.1"
   },
