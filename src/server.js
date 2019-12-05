@@ -15,9 +15,15 @@ export default function WebServer(portToListenOn=config.server.port) {
     httpServer,
     function startServer() {
       try {
+        // https://expressjs.com/en/guide/behind-proxies.html
         app.set('trust proxy', 1)
 
+        app.get('/', function indexRoute(req, res) {
+          res.redirect('/me')
+        })
+
         app.get('/me', function meRoute(req, res) {
+          // https://devcenter.heroku.com/articles/http-routing#heroku-headers
           const realClientIpAddress = (req.headers['x-forwarded-for'] || req.ip || socket.handshake.address || "").split(',')
           const ip = realClientIpAddress[realClientIpAddress.length - 1]
           res.json({ ip, ...geoip.lookup(ip) })

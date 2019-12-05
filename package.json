@@ -37,5 +37,5 @@
     "webpack-node-externals": "^1.7.2",
     "webpack-stream": "^5.2.1"
   },
-  "license": "UNLICENSED"
+  "license": "MIT"
 }

@@ -2,16 +2,19 @@
 
 ## geoip
 
-Lightweight API service to get geolocation data from IP addresses.
+Lightweight API service to report geolocation data from IP addresses.
+The underlying data is coming from [geoip-lite](https://www.npmjs.com/package/geoip-lite)
+so special thanks to the contributors of this package and
+MaxMind for keeping up-to-date information in the geolocation DB!
 
 ### Usage
 
 Simply make a GET request to the geoapi endpoint with the IP
-address located in the route of the URL.
+address located in the route of the URL,
+`https://geo.phalanx.risk3sixty.com/8.8.8.8`.
 
-You can also hit `https://geo.phalanx.risk3sixty.com/me` to
-get your current IP address and associated geolocation data
-reported for you as well.
+You can also hit the `/me` route to get your current
+IP address and associated geolocation.
 
 ```sh
 # https://geo.phalanx.risk3sixty.com/IPV4_OR_IPV6_IP_ADDRESS
@@ -39,3 +42,7 @@ $ gulp build
 # start server
 $ npm start
 ```
+
+### License
+
+MIT
