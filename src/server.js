@@ -15,16 +15,6 @@ export default function WebServer(portToListenOn=config.server.port) {
     httpServer,
     function startServer() {
       try {
-        // redirect to https if production and connection is not secure
-        app.use((req, res, next) => {
-          if (config.server.isProduction && config.server.host.indexOf('https') === 0 && !req.secure)
-            return res.redirect(`${config.server.host}${req.originalUrl}`)
-          next()
-        })
-
-        if (config.server.isProduction)
-          app.set('trust proxy', 1)
-
         app.get('/:ip', function ipRoute(req, res) {
           res.json(geoip.lookup(req.params.ip))
         })
