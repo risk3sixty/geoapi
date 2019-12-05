@@ -15,8 +15,16 @@ export default function WebServer(portToListenOn=config.server.port) {
     httpServer,
     function startServer() {
       try {
+        app.set('trust proxy', 1)
+
+        app.get('/me', function meRoute(req, res) {
+          const realClientIpAddress = (req.headers['x-forwarded-for'] || req.ip || socket.handshake.address || "").split(',')
+          const ip = realClientIpAddress[realClientIpAddress.length - 1]
+          res.json({ ip, ...geoip.lookup(ip) })
+        })
+
         app.get('/:ip', function ipRoute(req, res) {
-          res.json(geoip.lookup(req.params.ip))
+          res.json({ ip: req.params.ip, ...geoip.lookup(req.params.ip) })
         })
 
         // Express error handling
