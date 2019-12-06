@@ -14,7 +14,7 @@ export default function WebServer(portToListenOn=config.server.port) {
   return [
     httpServer,
     async function startServer() {
-      return await new Promise((resolve, reject) => {
+      return await new Promise(resolve => {
         try {
           // https://expressjs.com/en/guide/behind-proxies.html
           app.set('trust proxy', 1)
@@ -47,14 +47,8 @@ export default function WebServer(portToListenOn=config.server.port) {
   
         } catch(err) {
           log.error("Error starting server", err)
-          reject()
           process.exit()
         } finally {
-  
-          //handle if the process suddenly stops
-          process.on('SIGINT', () => { console.log('got SIGINT....'); process.exit() })
-          process.on('SIGTERM', () => { console.log('got SIGTERM....'); process.exit() })
-  
           return app
         }
       })
