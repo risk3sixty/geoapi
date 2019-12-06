@@ -6,7 +6,7 @@ gulp.task('src', function() {
   return gulp.src("./src/**/*.js")
     .pipe(plumber())
     .pipe(babel())
-    .pipe(gulp.dest("./"))
+    .pipe(gulp.dest("./dist"))
 })
 
 gulp.task('build', gulp.series('src'))

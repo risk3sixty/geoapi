@@ -1,9 +1,3 @@
-# ignore
 *.DS_Store
 /node_modules
-/bin
-/libs
-/config*.js
-/index*.js
-/server*.js
-*.env
+/dist

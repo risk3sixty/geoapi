@@ -19,10 +19,6 @@ export default function WebServer(portToListenOn=config.server.port) {
           // https://expressjs.com/en/guide/behind-proxies.html
           app.set('trust proxy', 1)
   
-          app.get('/', function indexRoute(req, res) {
-            res.redirect('/me')
-          })
-  
           app.get('/me', function meRoute(req, res) {
             // https://devcenter.heroku.com/articles/http-routing#heroku-headers
             const realClientIpAddress = (req.headers['x-forwarded-for'] || req.ip || socket.handshake.address || "").split(',')
@@ -33,11 +29,15 @@ export default function WebServer(portToListenOn=config.server.port) {
           app.get('/:ip', function ipRoute(req, res) {
             res.json({ ip: req.params.ip, ...geoip.lookup(req.params.ip) })
           })
+
+          app.get('*', function indexRoute(req, res) {
+            res.redirect('/me')
+          })
   
           // Express error handling
-          app.use(function ExpressErrorHandler(err, req, res, next) {
+          app.use(function expressErrorHandler(err, req, res, next) {
             log.error('Express error handling', err)
-            res.redirect(err.redirectRoute || '/')
+            res.sendStatus(500)
           })
   
           httpServer.listen(portToListenOn, () => {
