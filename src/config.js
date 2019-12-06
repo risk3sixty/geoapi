@@ -1,4 +1,4 @@
-const appName = process.env.APP_NAME || "geoip"
+const appName = process.env.APP_NAME || "geoapi"
 
 export default {
   app: {

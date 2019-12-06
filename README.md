@@ -1,6 +1,6 @@
 # [risk3sixty](https://risk3sixty.com)
 
-## geoip
+## geoapi
 
 Lightweight API service to report geolocation data from IP addresses.
 The underlying data is coming from [geoip-lite](https://www.npmjs.com/package/geoip-lite)
