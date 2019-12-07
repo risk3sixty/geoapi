@@ -4,15 +4,15 @@ import bunyan from 'bunyan'
 import geoip from 'geoip-lite'
 import config from './config'
 
-const log         = bunyan.createLogger(config.logger.options)
-const app         = express()
-const httpServer  = http.Server(app)
+const log = bunyan.createLogger(config.logger.options)
+const app = express()
+const server = http.Server(app)
 
 app.disable('x-powered-by')
 
 export default function WebServer(portToListenOn=config.server.port) {
   return [
-    httpServer,
+    server,
     async function startServer() {
       return await new Promise(resolve => {
         try {
@@ -21,7 +21,7 @@ export default function WebServer(portToListenOn=config.server.port) {
   
           app.get('/me', function meRoute(req, res) {
             // https://devcenter.heroku.com/articles/http-routing#heroku-headers
-            const realClientIpAddress = (req.headers['x-forwarded-for'] || req.ip || socket.handshake.address || "").split(',')
+            const realClientIpAddress = (req.headers['x-forwarded-for'] || req.ip || "").split(',')
             const ip = realClientIpAddress[realClientIpAddress.length - 1]
             res.json({ ip, ...geoip.lookup(ip) })
           })
@@ -30,26 +30,25 @@ export default function WebServer(portToListenOn=config.server.port) {
             res.json({ ip: req.params.ip, ...geoip.lookup(req.params.ip) })
           })
 
-          app.get('*', function indexRoute(req, res) {
+          app.all('*', function fallbackRoute(req, res) {
             res.redirect('/me')
           })
   
-          // Express error handling
           app.use(function expressErrorHandler(err, req, res, next) {
             log.error('Express error handling', err)
             res.sendStatus(500)
           })
   
-          httpServer.listen(portToListenOn, () => {
+          server.listen(portToListenOn, () => {
             log.info(`listening on *: ${portToListenOn}`)
             resolve()
           })
+
+          return app
   
         } catch(err) {
           log.error("Error starting server", err)
           process.exit()
-        } finally {
-          return app
         }
       })
     }
