@@ -1,5 +1,6 @@
 import http from 'http'
 import express from 'express'
+import cors from 'cors'
 import bunyan from 'bunyan'
 import geoip from 'geoip-lite'
 import config from './config'
@@ -18,6 +19,7 @@ export default function WebServer(portToListenOn=config.server.port) {
         try {
           // https://expressjs.com/en/guide/behind-proxies.html
           app.set('trust proxy', 1)
+          app.use(cors())
   
           app.get('/me', function meRoute(req, res) {
             // https://devcenter.heroku.com/articles/http-routing#heroku-headers

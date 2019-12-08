@@ -5,14 +5,18 @@
 Tiny API service to report geolocation data from IP addresses.
 The underlying data is coming from [geoip-lite](https://www.npmjs.com/package/geoip-lite)
 so special thanks to the contributors of this package and
-MaxMind for keeping up-to-date information in the geolocation DB!
+[MaxMind](https://maxmind.com) for keeping up-to-date information
+in the geolocation DB!
 
 ### Usage
 
 Make a GET request to the geoapi endpoint to `/me` or an IP
 address located in the route of the URL, e.g.
-`https://geo.phalanx.risk3sixty.com/8.8.8.8`. It will respond
-with JSON containing geolocation data present for the provided IP address.
+`https://geo.phalanx.risk3sixty.com/8.8.8.8`. A JSON response will
+contain geolocation data present for the provided IP address.
+
+Also, [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+is enabled for browser usage.
 
 ```sh
 # https://geo.phalanx.risk3sixty.com/IPV4_OR_IPV6_IP_ADDRESS
@@ -34,7 +38,7 @@ $ git clone https://github.com/Risk3sixty-Labs/geoapi
 $ cd geoapi
 $ npm install
 
-# Run tests
+# run tests
 $ npm test
 
 # build production files
