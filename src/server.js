@@ -10,7 +10,7 @@ const app = express()
 const server = http.Server(app)
 
 export default async function startServer(portToListenOn=config.server.port) {
-  return await new Promise(resolve => {
+  return await new Promise((resolve, reject) => {
     try {
       app.disable('x-powered-by')
 
@@ -40,14 +40,12 @@ export default async function startServer(portToListenOn=config.server.port) {
 
       server.listen(portToListenOn, () => {
         log.info(`listening on *: ${portToListenOn}`)
-        resolve()
+        resolve(app)
       })
-
-      return app
 
     } catch(err) {
       log.error("Error starting server", err)
-      process.exit()
+      reject(err)
     }
   })
 }

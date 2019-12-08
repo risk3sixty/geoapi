@@ -1,5 +1,9 @@
 import startServer from './server'
 
 ;(async function() {
-  await startServer()
+  try {
+    await startServer()
+  } catch(err) {
+    process.exit()
+  }
 })()
