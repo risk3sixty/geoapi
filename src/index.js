@@ -1,6 +1,4 @@
-import Server from './server'
-
-const [ , startServer ] = Server()
+import startServer from './server'
 
 ;(async function() {
   await startServer()
