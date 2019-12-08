@@ -42,7 +42,7 @@ $ npm install
 $ npm test
 
 # build production files
-$ gulp build
+$ npm run build
 
 # start server
 $ npm start

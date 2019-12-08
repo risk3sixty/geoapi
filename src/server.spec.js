@@ -1,14 +1,13 @@
 import assert from 'assert'
 import net from 'net'
 import request from 'request-promise-native'
-import Server from './server'
+import startServer from './server'
 
 const port = 9999
-const [ httpServer, startServer ] = Server(port)
 
 describe('#startServer', function() {
   before(`start server`, async function() {
-    await startServer()
+    await startServer(port)
   })
 
   it(`should have started a web server on the specified port`, async function() {
