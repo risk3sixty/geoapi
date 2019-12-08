@@ -10,10 +10,11 @@ in the geolocation DB!
 
 ### Usage
 
-Make a GET request to the geoapi endpoint to `/me` or an IP
-address located in the route of the URL, e.g.
-`https://geo.risk3sixty.com/8.8.8.8`. A JSON response will
-contain geolocation data present for the provided IP address.
+Make a GET request to the geoapi endpoint with `/me` or an IP
+address (IPv4 or IPv6) located in the path of the URL, e.g.
+`https://geo.risk3sixty.com/8.8.8.8`. The server responds with JSON
+that contains geolocation data present for the provided IP address,
+or your current IP address if `/me` was passed.
 
 Also, [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 is enabled for browser usage.
