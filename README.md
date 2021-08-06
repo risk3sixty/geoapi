@@ -35,7 +35,7 @@ $ curl https://geo.risk3sixty.com/2001:468:300:0:0:0:0:0
 ### Development
 
 ```sh
-$ git clone https://github.com/Risk3sixty-Labs/geoapi
+$ git clone https://github.com/risk3sixty/geoapi
 $ cd geoapi
 $ npm install
 
